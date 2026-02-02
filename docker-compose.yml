@@ -9,6 +9,14 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
+    labels:
+      traefik.enable: true
+      traefik.docker.network: web
+      traefik.http.routers.e8-front-main.rule: "Host(`lz.energy8.io`)"
+      traefik.http.routers.e8-front-main.entrypoints: websecure
+      traefik.http.routers.e8-front-main.tls: true
+      traefik.http.routers.e8-front-main.tls.certresolver: letsencrypt
+      traefik.http.services.e8-front-main.loadbalancer.server.port: 3000
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
