@@ -21,12 +21,10 @@ services:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
       - NEXT_PUBLIC_THIRDWEB_CLIENT_ID=${NEXT_PUBLIC_THIRDWEB_CLIENT_ID}
-    volumes:
-      # Optional: mount public directory for static assets during development
-      # - ./public:/app/public:ro
     networks:
-      - bridge-network
+      - web
 
 networks:
-  bridge-network:
-    driver: bridge
+  web:
+    external: true
+    name: web
